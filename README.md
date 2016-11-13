@@ -2,7 +2,7 @@
 
 ## Get a list of headlines
 
-Grep by candidates mentions, clean up it from html tags
+Grep by candidates mentions, clean up it from html tags. Headlines from huffingtonpost for October 2016 were used.
 
 ```
 for i in `seq 1 30`; \
@@ -18,21 +18,26 @@ done
 
 `egrep -v "^Donald Trump$"\|"^Hillary Clinton$" headlines.txt > headlines1.txt # remove single mentiones`
 
+## Normalize
+
+Remove duplicates (mentiones )
+sort  headlines1.txt  | uniq  -u > headlines2.txt
+
 ## Count statistics of mentions
 
 Don't count mentions where both names present in one line.
 
-First candidate was mentioned 570 times:
+First candidate was mentioned 620 times:
 ```
-$ egrep -i trump headlines1.txt | grep -iv hillary | wc -l
-570
+$ egrep -i trump headlines2.txt | grep -iv hillary | wc -l
+620
 ```
 
-The other was mentioned... 84
+The other was mentioned... 95 
 
 ```
-$ egrep -i hillary headlines1.txt | grep -iv trump | wc -l
-84
+$ egrep -i hillary headlines2.txt | grep -iv trump | wc -l
+95
 ```
 
 Lol
